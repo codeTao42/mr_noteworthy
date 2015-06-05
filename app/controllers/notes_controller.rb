@@ -9,7 +9,11 @@ class NotesController < ApplicationController
   end
 
   def new
-    @note = current_user.notes.build
+    if user_signed_in?
+      @note = current_user.notes.build
+    else
+      redirect_to welcome_index_path
+    end
   end
 
   def create
